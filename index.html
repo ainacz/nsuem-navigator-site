@@ -20,11 +20,8 @@
     .brand { display: flex; align-items: center; gap: 18px; font-size: 12px; font-family: var(--display); font-weight: 500; }
     .brand img { width: 158px; height: auto; display: block; }
     .brand span { border-left: 1px solid var(--line); padding-left: 18px; }
-    .header-note { color: var(--muted); font-size: 13px; }
     main { padding: 76px 0 52px; }
     .hero { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); gap: 72px; align-items: center; }
-    .eyebrow { margin: 0 0 24px; font-size: 12px; font-weight: 650; letter-spacing: 1.6px; text-transform: uppercase; display: flex; align-items: center; gap: 10px; }
-    .eyebrow::before { content: ""; width: 12px; height: 12px; background: var(--orange); clip-path: polygon(0 100%, 100% 0, 100% 100%); flex: 0 0 auto; }
     h1 { margin: 0; font-family: var(--display); color: var(--blue); font-size: clamp(36px, 4.2vw, 54px); line-height: 1.2; letter-spacing: -1.8px; font-weight: 600; }
     h1 span { display: block; color: var(--purple); }
     .intro { margin: 26px 0 0; max-width: 400px; font-size: 20px; line-height: 1.5; }
@@ -43,17 +40,11 @@
     .platform-name { display: block; font-family: var(--display); font-size: 13px; line-height: 1.6; font-weight: 500; }
     .platform-detail { display: block; margin-top: 4px; font-size: 12px; color: #fff; }
     .arrow { margin-left: auto; width: 20px; height: 20px; flex: 0 0 auto; }
-    .choose-note { margin: 20px 0 0 !important; display: flex; align-items: center; gap: 7px; font-size: 12px !important; }
-    .choose-note svg { width: 15px; height: 15px; flex: 0 0 auto; }
     .examples { margin-top: 70px; padding-top: 30px; border-top: 1px solid var(--line); }
     .examples h2 { margin: 0 0 22px; color: var(--muted); font-size: 13px; font-weight: 500; }
     .question-list { display: grid; grid-template-columns: repeat(3, 1fr); margin: 0; padding: 0; list-style: none; gap: 28px; }
     .question-list li { display: flex; align-items: flex-start; gap: 12px; font-size: 16px; line-height: 1.5; }
     .question-list svg { color: var(--blue); width: 20px; height: 20px; flex: 0 0 auto; margin-top: 2px; }
-    footer { display: flex; justify-content: space-between; align-items: baseline; gap: 24px; border-top: 1px solid var(--line); padding: 24px 0 30px; font-size: 12px; line-height: 1.6; color: var(--muted); }
-    footer p { margin: 0; max-width: 560px; }
-    footer a { text-underline-offset: 4px; white-space: nowrap; }
-    .accent { color: var(--blue); display: inline-block; font-size: 12px; font-weight: 600; margin: 0 0 28px; padding-top: 8px; }
     @media (max-width: 900px) {
       .page { padding: 0 30px; }
       .hero { gap: 36px; }
@@ -71,14 +62,11 @@
       .brand { gap: 12px; font-size: 10px; }
       .brand img { width: 126px; }
       .brand span { padding-left: 12px; }
-      .header-note { display: none; }
       main { padding: 38px 0 32px; }
       .hero { grid-template-columns: minmax(0, 1fr); gap: 48px; }
-      .eyebrow { margin-bottom: 18px; font-size: 11px; }
       h1 { font-size: clamp(27px, 8.2vw, 49px); letter-spacing: -1px; }
       .intro { font-size: 18px; margin-top: 20px; max-width: 340px; }
       .aside-note { margin-top: 10px; font-size: 13px; }
-      .accent { margin-bottom: 22px; }
       .messengers { padding: 24px 20px; border-radius: 14px; }
       .messengers h2 { font-size: 17px; }
       .messenger { min-height: 82px; padding: 14px 12px; gap: 10px; }
@@ -89,7 +77,6 @@
       .question-list { grid-template-columns: 1fr; gap: 17px; }
       .question-list li { font-size: 15px; }
       .examples h2 { margin-bottom: 20px; }
-      footer { flex-direction: column; gap: 12px; padding-top: 22px; }
     }
     @media (prefers-reduced-motion: reduce) { .messenger { transition: none; } a.messenger:hover { transform: none; } }
   </style>
@@ -101,19 +88,16 @@
         <img src="./assets/nsuem-logo.png" alt="НГУЭУ" width="3168" height="1040">
         <span>Навигатор</span>
       </div>
-      <span class="header-note">Университет становится понятнее</span>
     </header>
     <main>
       <div class="hero">
         <section aria-labelledby="title">
-          <p class="eyebrow">На связи в твоём мессенджере</p>
           <h1 id="title">Навигатор <span>НГУЭУ</span></h1>
           <p class="intro">Помощник по вопросам учёбы и&nbsp;жизни в&nbsp;университете.</p>
           <p class="aside-note">Кабинеты, справки, стипендии, общежитие.<br>Просто напиши, что хочешь узнать.</p>
         </section>
         <section class="messengers" aria-labelledby="messengers-title">
           <svg class="brand-pattern" viewBox="0 0 108 62" aria-hidden="true"><path d="M0 62 54 0v62Z" fill="#0c54a0"/><path d="M54 0h54L54 62Z" fill="#8160a4"/><path d="M81 31h27v31Z" fill="#f39430"/></svg>
-          <span class="accent">Один помощник. Два мессенджера.</span>
           <h2 id="messengers-title">Где тебе удобнее?</h2>
           <p>Открой бота и задай вопрос своими словами.</p>
           <a class="messenger telegram" href="https://t.me/ninhkurs_bot" aria-label="Открыть Навигатор НГУЭУ в Telegram">
@@ -126,22 +110,20 @@
             <span><span class="platform-name">Открыть в MAX</span><span class="platform-detail">Навигатор НГУЭУ</span></span>
             <svg class="arrow" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </a>
-          <p class="choose-note"><svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="m4 10 4 4 8-8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Выбирай любой — база знаний общая</p>
         </section>
       </div>
       <section class="examples" aria-labelledby="examples-title">
         <h2 id="examples-title">Например, можно спросить</h2>
         <ul class="question-list">
-          <li><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M19 10c0 5-7 11-7 11S5 15 5 10a7 7 0 1 1 14 0Z" stroke="currentColor" stroke-width="1.5"/><circle cx="12" cy="10" r="2.5" stroke="currentColor" stroke-width="1.5"/></svg><span>«Где находится<br>кабинет 5-210?»</span></li>
-          <li><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 3h9l4 4v14H6V3Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M14 3v5h5M9 12h7m-7 4h5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg><span>«Как получить справку<br>об обучении?»</span></li>
-          <li><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m3 7 9-4 9 4-9 4-9-4Zm4 3v6c3 3 7 3 10 0v-6m4-3v8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg><span>«Какие бывают<br>стипендии?»</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m3 7 9-4 9 4-9 4-9-4Zm4 3v6c3 3 7 3 10 0v-6m4-3v8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg><span>«Как перевестись с&nbsp;платного на&nbsp;бюджет?»</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 3h9l4 4v14H6V3Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M14 3v5h5M9 12h7m-7 4h5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg><span>«Не сдал экзамен. Что&nbsp;делать дальше?»</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.5"/><path d="M3 12h18M12 3c5 5 5 13 0 18-5-5-5-13 0-18Z" stroke="currentColor" stroke-width="1.5"/></svg><span>«Как уехать учиться за&nbsp;границу по&nbsp;обмену?»</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m3 10 9-7 9 7M5 9v12h14V9M9 21v-7h6v7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg><span>«Мне не дали общежитие. Какие&nbsp;есть варианты?»</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="3" y="7" width="18" height="14" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M8 7V3h8v4M3 12c5 3 13 3 18 0M10 14h4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg><span>«Где искать стажировку или&nbsp;работу во&nbsp;время учёбы?»</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M3 4h6l3 2 3-2h6v16h-6l-3 2-3-2H3V4Zm9 2v16M6 8h3m-3 4h3m6-4h3m-3 4h3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg><span>«Поступаю после колледжа. Какие&nbsp;экзамены нужны?»</span></li>
         </ul>
       </section>
     </main>
-    <footer>
-      <p>Навигатор помогает найти информацию. Важные сроки и&nbsp;условия уточняй в&nbsp;своём подразделении университета.</p>
-      <a href="https://nsuem.ru/1kurs/">Справочник первокурсника ↗</a>
-    </footer>
   </div>
 </body>
 </html>
