@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0c54a0">
+  <meta name="description" content="Навигатор НГУЭУ — помощник по вопросам учёбы и жизни в университете. Выберите Telegram или MAX и задайте свой вопрос.">
+  <title>Навигатор НГУЭУ — помощник по университету</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%230c54a0'/%3E%3Cpath d='M12 44 36 20v24Zm24-24h16L36 36Z' fill='white'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="./assets/fonts.css">
+  <link rel="preload" href="./assets/unbounded-cyrillic.woff2" as="font" type="font/woff2" crossorigin>
+  <style>
+    :root { color-scheme: light; --paper: #fff; --ink: #172e50; --muted: #5c6880; --blue: #0c54a0; --purple: #8160a4; --orange: #f39430; --line: #e0e6ef; --display: "Unbounded", "Segoe UI", sans-serif; }
+    * { box-sizing: border-box; }
+    body { margin: 0; background: var(--paper); color: var(--ink); font-family: "Segoe UI", Arial, sans-serif; -webkit-font-smoothing: antialiased; }
+    a { color: inherit; }
+    a:focus-visible { outline: 3px solid var(--orange); outline-offset: 6px; }
+    .page { max-width: 1160px; margin: auto; padding: 0 48px; }
+    header { display: flex; align-items: center; justify-content: space-between; padding: 30px 0; border-bottom: 1px solid var(--line); gap: 20px; }
+    .brand { display: flex; align-items: center; gap: 18px; font-size: 12px; font-family: var(--display); font-weight: 500; }
+    .brand img { width: 158px; height: auto; display: block; }
+    .brand span { border-left: 1px solid var(--line); padding-left: 18px; }
+    .header-note { color: var(--muted); font-size: 13px; }
+    main { padding: 76px 0 52px; }
+    .hero { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); gap: 72px; align-items: center; }
+    .eyebrow { margin: 0 0 24px; font-size: 12px; font-weight: 650; letter-spacing: 1.6px; text-transform: uppercase; display: flex; align-items: center; gap: 10px; }
+    .eyebrow::before { content: ""; width: 12px; height: 12px; background: var(--orange); clip-path: polygon(0 100%, 100% 0, 100% 100%); flex: 0 0 auto; }
+    h1 { margin: 0; font-family: var(--display); color: var(--blue); font-size: clamp(36px, 4.2vw, 54px); line-height: 1.2; letter-spacing: -1.8px; font-weight: 600; }
+    h1 span { display: block; color: var(--purple); }
+    .intro { margin: 26px 0 0; max-width: 400px; font-size: 20px; line-height: 1.5; }
+    .aside-note { margin: 16px 0 0; font-size: 14px; color: var(--muted); line-height: 1.6; }
+    .messengers { position: relative; background: #f2f5fa; border-radius: 18px; padding: 32px; }
+    .brand-pattern { position: absolute; top: -31px; right: 30px; width: 108px; height: 62px; }
+    .messengers h2 { font-family: var(--display); font-size: 20px; line-height: 1.4; letter-spacing: -.6px; font-weight: 500; margin: 0 0 8px; }
+    .messengers > p { margin: 0 0 24px; color: var(--muted); font-size: 14px; line-height: 1.6; }
+    .messenger { display: flex; align-items: center; gap: 14px; width: 100%; min-height: 88px; padding: 16px 18px; border-radius: 10px; text-decoration: none; transition: background .15s, transform .15s; }
+    a.messenger:hover { transform: translateY(-2px); }
+    .telegram { background: var(--blue); color: #fff; }
+    .telegram:hover { background: #094382; }
+    .max { background: var(--purple); color: #fff; margin-top: 12px; }
+    a.max:hover { background: #6c4b90; }
+    .platform-icon { width: 38px; height: 38px; flex: 0 0 auto; }
+    .platform-name { display: block; font-family: var(--display); font-size: 13px; line-height: 1.6; font-weight: 500; }
+    .platform-detail { display: block; margin-top: 4px; font-size: 12px; color: #fff; }
+    .arrow { margin-left: auto; width: 20px; height: 20px; flex: 0 0 auto; }
+    .choose-note { margin: 20px 0 0 !important; display: flex; align-items: center; gap: 7px; font-size: 12px !important; }
+    .choose-note svg { width: 15px; height: 15px; flex: 0 0 auto; }
+    .examples { margin-top: 70px; padding-top: 30px; border-top: 1px solid var(--line); }
+    .examples h2 { margin: 0 0 22px; color: var(--muted); font-size: 13px; font-weight: 500; }
+    .question-list { display: grid; grid-template-columns: repeat(3, 1fr); margin: 0; padding: 0; list-style: none; gap: 28px; }
+    .question-list li { display: flex; align-items: flex-start; gap: 12px; font-size: 16px; line-height: 1.5; }
+    .question-list svg { color: var(--blue); width: 20px; height: 20px; flex: 0 0 auto; margin-top: 2px; }
+    footer { display: flex; justify-content: space-between; align-items: baseline; gap: 24px; border-top: 1px solid var(--line); padding: 24px 0 30px; font-size: 12px; line-height: 1.6; color: var(--muted); }
+    footer p { margin: 0; max-width: 560px; }
+    footer a { text-underline-offset: 4px; white-space: nowrap; }
+    .accent { color: var(--blue); display: inline-block; font-size: 12px; font-weight: 600; margin: 0 0 28px; padding-top: 8px; }
+    @media (max-width: 900px) {
+      .page { padding: 0 30px; }
+      .hero { gap: 36px; }
+      main { padding-top: 56px; }
+      h1 { font-size: 37px; letter-spacing: -1.4px; }
+      .intro { font-size: 18px; }
+      .messengers { padding: 24px; }
+      .platform-name { font-size: 11px; }
+      .question-list { gap: 22px; }
+      .question-list li { font-size: 14px; }
+    }
+    @media (max-width: 650px) {
+      .page { padding: 0 24px; }
+      header { padding: 22px 0; }
+      .brand { gap: 12px; font-size: 10px; }
+      .brand img { width: 126px; }
+      .brand span { padding-left: 12px; }
+      .header-note { display: none; }
+      main { padding: 38px 0 32px; }
+      .hero { grid-template-columns: minmax(0, 1fr); gap: 48px; }
+      .eyebrow { margin-bottom: 18px; font-size: 11px; }
+      h1 { font-size: clamp(27px, 8.2vw, 49px); letter-spacing: -1px; }
+      .intro { font-size: 18px; margin-top: 20px; max-width: 340px; }
+      .aside-note { margin-top: 10px; font-size: 13px; }
+      .accent { margin-bottom: 22px; }
+      .messengers { padding: 24px 20px; border-radius: 14px; }
+      .messengers h2 { font-size: 17px; }
+      .messenger { min-height: 82px; padding: 14px 12px; gap: 10px; }
+      .platform-name { font-size: 12px; }
+      .platform-icon { width: 30px; height: 30px; }
+      .arrow { width: 18px; height: 18px; }
+      .examples { margin-top: 36px; padding-top: 26px; }
+      .question-list { grid-template-columns: 1fr; gap: 17px; }
+      .question-list li { font-size: 15px; }
+      .examples h2 { margin-bottom: 20px; }
+      footer { flex-direction: column; gap: 12px; padding-top: 22px; }
+    }
+    @media (prefers-reduced-motion: reduce) { .messenger { transition: none; } a.messenger:hover { transform: none; } }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header>
+      <div class="brand">
+        <img src="./assets/nsuem-logo.png" alt="НГУЭУ" width="3168" height="1040">
+        <span>Навигатор</span>
+      </div>
+      <span class="header-note">Университет становится понятнее</span>
+    </header>
+    <main>
+      <div class="hero">
+        <section aria-labelledby="title">
+          <p class="eyebrow">На связи в твоём мессенджере</p>
+          <h1 id="title">Навигатор <span>НГУЭУ</span></h1>
+          <p class="intro">Помощник по вопросам учёбы и&nbsp;жизни в&nbsp;университете.</p>
+          <p class="aside-note">Кабинеты, справки, стипендии, общежитие.<br>Просто напиши, что хочешь узнать.</p>
+        </section>
+        <section class="messengers" aria-labelledby="messengers-title">
+          <svg class="brand-pattern" viewBox="0 0 108 62" aria-hidden="true"><path d="M0 62 54 0v62Z" fill="#0c54a0"/><path d="M54 0h54L54 62Z" fill="#8160a4"/><path d="M81 31h27v31Z" fill="#f39430"/></svg>
+          <span class="accent">Один помощник. Два мессенджера.</span>
+          <h2 id="messengers-title">Где тебе удобнее?</h2>
+          <p>Открой бота и задай вопрос своими словами.</p>
+          <a class="messenger telegram" href="https://t.me/ninhkurs_bot" aria-label="Открыть Навигатор НГУЭУ в Telegram">
+            <svg class="platform-icon" viewBox="0 0 40 40" fill="none" aria-hidden="true"><path d="m6 19 27-11-5 25-9-7-5 4 1-9 14-9-17 12z" fill="currentColor"/></svg>
+            <span><span class="platform-name">Открыть в Telegram</span><span class="platform-detail">@ninhkurs_bot</span></span>
+            <svg class="arrow" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+          <a class="messenger max" href="https://max.ru/se13712944_1_bot" aria-label="Открыть Навигатор НГУЭУ в MAX">
+            <svg class="platform-icon" viewBox="0 0 40 40" fill="none" aria-hidden="true"><path d="M32 19a12 12 0 0 1-17 11l-7 2 2-7a12 12 0 1 1 22-6Z" stroke="currentColor" stroke-width="2.4"/><path d="M15 23v-9l5 6 5-6v9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <span><span class="platform-name">Открыть в MAX</span><span class="platform-detail">Навигатор НГУЭУ</span></span>
+            <svg class="arrow" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+          <p class="choose-note"><svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="m4 10 4 4 8-8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Выбирай любой — база знаний общая</p>
+        </section>
+      </div>
+      <section class="examples" aria-labelledby="examples-title">
+        <h2 id="examples-title">Например, можно спросить</h2>
+        <ul class="question-list">
+          <li><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M19 10c0 5-7 11-7 11S5 15 5 10a7 7 0 1 1 14 0Z" stroke="currentColor" stroke-width="1.5"/><circle cx="12" cy="10" r="2.5" stroke="currentColor" stroke-width="1.5"/></svg><span>«Где находится<br>кабинет 5-210?»</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 3h9l4 4v14H6V3Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M14 3v5h5M9 12h7m-7 4h5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg><span>«Как получить справку<br>об обучении?»</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m3 7 9-4 9 4-9 4-9-4Zm4 3v6c3 3 7 3 10 0v-6m4-3v8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg><span>«Какие бывают<br>стипендии?»</span></li>
+        </ul>
+      </section>
+    </main>
+    <footer>
+      <p>Навигатор помогает найти информацию. Важные сроки и&nbsp;условия уточняй в&nbsp;своём подразделении университета.</p>
+      <a href="https://nsuem.ru/1kurs/">Справочник первокурсника ↗</a>
+    </footer>
+  </div>
+</body>
+</html>
