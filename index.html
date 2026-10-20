@@ -14,7 +14,7 @@
     * { box-sizing: border-box; }
     body { margin: 0; background: var(--paper); color: var(--ink); font-family: "Segoe UI", Arial, sans-serif; -webkit-font-smoothing: antialiased; }
     a { color: inherit; }
-    a:focus-visible { outline: 3px solid var(--orange); outline-offset: 6px; }
+    a:focus-visible, button:focus-visible, .review-track:focus-visible { outline: 3px solid var(--orange); outline-offset: 6px; }
     .page { max-width: 1160px; margin: auto; padding: 0 48px; }
     header { display: flex; align-items: center; justify-content: space-between; padding: 30px 0; border-bottom: 1px solid var(--line); gap: 20px; }
     .brand { display: flex; align-items: center; gap: 18px; font-size: 12px; font-family: var(--display); font-weight: 500; }
@@ -45,6 +45,23 @@
     .question-list { display: grid; grid-template-columns: repeat(3, 1fr); margin: 0; padding: 0; list-style: none; gap: 28px; }
     .question-list li { display: flex; align-items: flex-start; gap: 12px; font-size: 16px; line-height: 1.5; }
     .question-list svg { color: var(--blue); width: 20px; height: 20px; flex: 0 0 auto; margin-top: 2px; }
+    .reviews { margin-top: 64px; padding-top: 30px; border-top: 1px solid var(--line); }
+    .reviews-heading { display: flex; align-items: center; justify-content: space-between; gap: 20px; margin-bottom: 24px; }
+    .reviews h2 { margin: 0 0 9px; font: 500 20px/1.5 var(--display); letter-spacing: -.6px; }
+    .reviews-heading p { margin: 0; font-size: 13px; color: var(--muted); }
+    .review-controls { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
+    .review-controls[hidden] { display: none; }
+    .review-counter { min-width: 76px; margin-right: 4px; color: var(--muted); font-size: 12px; text-align: right; font-variant-numeric: tabular-nums; }
+    .review-controls button { width: 44px; height: 44px; display: grid; place-items: center; padding: 0; border: 1px solid var(--line); border-radius: 50%; background: #fff; color: var(--blue); cursor: pointer; font: 24px/1 "Segoe UI", sans-serif; }
+    .review-controls button:hover:not(:disabled) { background: #f2f5fa; border-color: var(--blue); }
+    .review-controls button:disabled { opacity: .35; cursor: default; }
+    .review-track { display: grid; grid-auto-flow: column; grid-auto-columns: min(352px, calc(100% - 26px)); gap: 16px; overflow-x: auto; overscroll-behavior-x: contain; scroll-snap-type: x mandatory; scrollbar-width: thin; scrollbar-color: #becbdf transparent; list-style: none; margin: 0; padding: 0 0 16px; }
+    .review-card { min-width: 0; padding: 24px; border: 1px solid var(--line); border-radius: 16px; background: #f8faff; scroll-snap-align: start; }
+    .review-author { display: block; margin-bottom: 5px; font-size: 14px; font-weight: 600; }
+    .review-card time { display: block; color: var(--muted); font-size: 12px; }
+    .review-card blockquote { margin: 22px 0 0; font-size: 16px; line-height: 1.65; overflow-wrap: anywhere; }
+    .review-card.is-collapsed blockquote { display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 5; overflow: hidden; }
+    .review-expand { min-height: 44px; padding: 12px 0 0; border: 0; background: none; color: var(--blue); font: 13px "Segoe UI", sans-serif; cursor: pointer; text-align: left; }
     @media (max-width: 900px) {
       .page { padding: 0 30px; }
       .hero { gap: 36px; }
@@ -77,6 +94,11 @@
       .question-list { grid-template-columns: 1fr; gap: 17px; }
       .question-list li { font-size: 15px; }
       .examples h2 { margin-bottom: 20px; }
+      .reviews { margin-top: 40px; padding-top: 26px; }
+      .reviews-heading { flex-wrap: wrap; gap: 16px; margin-bottom: 20px; }
+      .reviews h2 { font-size: 17px; }
+      .review-controls { margin-left: auto; }
+      .review-card { padding: 22px; }
     }
     @media (prefers-reduced-motion: reduce) { .messenger { transition: none; } a.messenger:hover { transform: none; } }
   </style>
@@ -123,7 +145,195 @@
           <li><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M3 4h6l3 2 3-2h6v16h-6l-3 2-3-2H3V4Zm9 2v16M6 8h3m-3 4h3m6-4h3m-3 4h3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg><span>«Поступаю после колледжа. Какие&nbsp;экзамены нужны?»</span></li>
         </ul>
       </section>
+      <section class="reviews" id="reviews" aria-labelledby="reviews-title" aria-roledescription="карусель">
+        <div class="reviews-heading">
+          <div><h2 id="reviews-title">Отзывы о Навигаторе</h2><p>20 отзывов · сентябрь — октябрь 2026</p></div>
+          <div class="review-controls" hidden>
+            <span class="review-counter" role="status" aria-atomic="true"></span>
+            <button type="button" data-direction="-1" aria-label="Предыдущие отзывы" aria-controls="review-track" disabled><span aria-hidden="true">←</span></button>
+            <button type="button" data-direction="1" aria-label="Следующие отзывы" aria-controls="review-track"><span aria-hidden="true">→</span></button>
+          </div>
+        </div>
+        <ol class="review-track" id="review-track" tabindex="0" aria-label="Отзывы пользователей, от новых к старым">
+          <li class="review-card" data-review="20">
+            <span class="review-author">Пользователь бота</span>
+            <time datetime="2026-10-20T19:36:00+07:00">20 октября 2026</time>
+            <blockquote id="review-text-20">Бот работает без ошибок, очень подробно описан ответ на каждый мой вопрос, очень нужная вещь, буду пользоваться</blockquote>
+            <button class="review-expand" type="button" aria-expanded="false" aria-controls="review-text-20" hidden>Читать полностью</button>
+          </li>
+          <li class="review-card" data-review="19">
+            <span class="review-author">Пользователь бота</span>
+            <time datetime="2026-10-17T18:55:00+07:00">17 октября 2026</time>
+            <blockquote id="review-text-19">👍</blockquote>
+            <button class="review-expand" type="button" aria-expanded="false" aria-controls="review-text-19" hidden>Читать полностью</button>
+          </li>
+          <li class="review-card" data-review="18">
+            <span class="review-author">Пользователь бота</span>
+            <time datetime="2026-10-05T22:58:00+07:00">5 октября 2026</time>
+            <blockquote id="review-text-18">Очень грамотный ответ, спасибо</blockquote>
+            <button class="review-expand" type="button" aria-expanded="false" aria-controls="review-text-18" hidden>Читать полностью</button>
+          </li>
+          <li class="review-card" data-review="17">
+            <span class="review-author">Пользователь бота</span>
+            <time datetime="2026-09-26T00:47:00+07:00">26 сентября 2026</time>
+            <blockquote id="review-text-17">очень круто!!!</blockquote>
+            <button class="review-expand" type="button" aria-expanded="false" aria-controls="review-text-17" hidden>Читать полностью</button>
+          </li>
+          <li class="review-card" data-review="16">
+            <span class="review-author">Пользователь бота</span>
+            <time datetime="2026-09-25T11:34:00+07:00">25 сентября 2026</time>
+            <blockquote id="review-text-16">👎</blockquote>
+            <button class="review-expand" type="button" aria-expanded="false" aria-controls="review-text-16" hidden>Читать полностью</button>
+          </li>
+          <li class="review-card" data-review="15">
+            <span class="review-author">Куратор группы</span>
+            <time datetime="2026-09-14T09:59:00+07:00">14 сентября 2026</time>
+            <blockquote id="review-text-15">супер полезный бот для наставников и первокурсников, очень грамотно отвечает🙌🏼</blockquote>
+            <button class="review-expand" type="button" aria-expanded="false" aria-controls="review-text-15" hidden>Читать полностью</button>
+          </li>
+          <li class="review-card" data-review="14">
+            <span class="review-author">Пользователь бота</span>
+            <time datetime="2026-09-11T19:09:00+07:00">11 сентября 2026</time>
+            <blockquote id="review-text-14">Вся информация написана подробно, что намного облегчает, нежели искать на самом сайте</blockquote>
+            <button class="review-expand" type="button" aria-expanded="false" aria-controls="review-text-14" hidden>Читать полностью</button>
+          </li>
+          <li class="review-card" data-review="13">
+            <span class="review-author">Пользователь бота</span>
+            <time datetime="2026-09-11T18:17:00+07:00">11 сентября 2026</time>
+            <blockquote id="review-text-13">Очень удобно👍👍👍</blockquote>
+            <button class="review-expand" type="button" aria-expanded="false" aria-controls="review-text-13" hidden>Читать полностью</button>
+          </li>
+          <li class="review-card" data-review="12">
+            <span class="review-author">Пользователь бота</span>
+            <time datetime="2026-09-11T16:22:00+07:00">11 сентября 2026</time>
+            <blockquote id="review-text-12">очень крутой бот, который помогает со всем, уважению тому человеку который это создал</blockquote>
+            <button class="review-expand" type="button" aria-expanded="false" aria-controls="review-text-12" hidden>Читать полностью</button>
+          </li>
+          <li class="review-card" data-review="11">
+            <span class="review-author">Пользователь бота</span>
+            <time datetime="2026-09-11T16:14:00+07:00">11 сентября 2026</time>
+            <blockquote id="review-text-11">Просто самый крутой бот, который помогает со всем, уважению тому человеку который это создал</blockquote>
+            <button class="review-expand" type="button" aria-expanded="false" aria-controls="review-text-11" hidden>Читать полностью</button>
+          </li>
+          <li class="review-card" data-review="10">
+            <span class="review-author">Пользователь бота</span>
+            <time datetime="2026-09-11T11:34:00+07:00">11 сентября 2026</time>
+            <blockquote id="review-text-10">Бот работает просто чудесно! Он помог мне с моими целями, все ясно и объяснено простым языком.</blockquote>
+            <button class="review-expand" type="button" aria-expanded="false" aria-controls="review-text-10" hidden>Читать полностью</button>
+          </li>
+          <li class="review-card" data-review="9">
+            <span class="review-author">Пользователь бота</span>
+            <time datetime="2026-09-11T08:38:00+07:00">11 сентября 2026</time>
+            <blockquote id="review-text-9">Все нормально</blockquote>
+            <button class="review-expand" type="button" aria-expanded="false" aria-controls="review-text-9" hidden>Читать полностью</button>
+          </li>
+          <li class="review-card" data-review="8">
+            <span class="review-author">Пользователь бота</span>
+            <time datetime="2026-09-10T21:29:00+07:00">10 сентября 2026</time>
+            <blockquote id="review-text-8">Очень удобный бот, отвечает быстро. Больше не нужно звонить и листать сайт. Рекомендую!</blockquote>
+            <button class="review-expand" type="button" aria-expanded="false" aria-controls="review-text-8" hidden>Читать полностью</button>
+          </li>
+          <li class="review-card" data-review="7">
+            <span class="review-author">Пользователь бота</span>
+            <time datetime="2026-09-10T21:25:00+07:00">10 сентября 2026</time>
+            <blockquote id="review-text-7">Всё работает прекрасно, бот полезный!</blockquote>
+            <button class="review-expand" type="button" aria-expanded="false" aria-controls="review-text-7" hidden>Читать полностью</button>
+          </li>
+          <li class="review-card" data-review="6">
+            <span class="review-author">Пользователь бота</span>
+            <time datetime="2026-09-10T21:09:00+07:00">10 сентября 2026</time>
+            <blockquote id="review-text-6" lang="en">This bot is brilliant!! I got some interesting info from this bot. Great, and good luck.</blockquote>
+            <button class="review-expand" type="button" aria-expanded="false" aria-controls="review-text-6" hidden>Читать полностью</button>
+          </li>
+          <li class="review-card" data-review="5">
+            <span class="review-author">Пользователь бота</span>
+            <time datetime="2026-09-10T20:57:00+07:00">10 сентября 2026</time>
+            <blockquote id="review-text-5">Очень удобный и полезный бот! Быстро помогает найти нужную информацию о вузе, разобраться с учебными вопросами и получить ответы без необходимости долго искать всё самостоятельно. Интерфейс понятный, всё работает достаточно быстро. Особенно удобно, что вся необходимая информация доступна в телеграмме.</blockquote>
+            <button class="review-expand" type="button" aria-expanded="false" aria-controls="review-text-5" hidden>Читать полностью</button>
+          </li>
+          <li class="review-card" data-review="4">
+            <span class="review-author">Пользователь бота</span>
+            <time datetime="2026-09-10T20:37:00+07:00">10 сентября 2026</time>
+            <blockquote id="review-text-4">замечаний нет</blockquote>
+            <button class="review-expand" type="button" aria-expanded="false" aria-controls="review-text-4" hidden>Читать полностью</button>
+          </li>
+          <li class="review-card" data-review="3">
+            <span class="review-author">Пользователь бота</span>
+            <time datetime="2026-09-10T20:24:00+07:00">10 сентября 2026</time>
+            <blockquote id="review-text-3">лучший бот господи боже храни долаана , я теперь буду знать где туалет и кабинеты, и на вопросы любые ответы есть:) реально топчик, 1000000/10</blockquote>
+            <button class="review-expand" type="button" aria-expanded="false" aria-controls="review-text-3" hidden>Читать полностью</button>
+          </li>
+          <li class="review-card" data-review="2">
+            <span class="review-author">Пользователь бота</span>
+            <time datetime="2026-09-10T20:19:00+07:00">10 сентября 2026</time>
+            <blockquote id="review-text-2">Всё по делу, и кабинет, и номер, и почту</blockquote>
+            <button class="review-expand" type="button" aria-expanded="false" aria-controls="review-text-2" hidden>Читать полностью</button>
+          </li>
+          <li class="review-card" data-review="1">
+            <span class="review-author">Пользователь бота</span>
+            <time datetime="2026-09-10T20:10:00+07:00">10 сентября 2026</time>
+            <blockquote id="review-text-1">Всё круто работает, лайк</blockquote>
+            <button class="review-expand" type="button" aria-expanded="false" aria-controls="review-text-1" hidden>Читать полностью</button>
+          </li>
+        </ol>
+      </section>
     </main>
   </div>
+  <script>
+    const track = document.querySelector('.review-track');
+    const cards = [...track.children];
+    const controls = document.querySelector('.review-controls');
+    const previous = controls.querySelector('[data-direction="-1"]');
+    const next = controls.querySelector('[data-direction="1"]');
+    const counter = controls.querySelector('.review-counter');
+    function updateReviewExpansion() {
+      for (const card of cards) {
+        const quote = card.querySelector('blockquote');
+        const button = card.querySelector('.review-expand');
+        const expanded = button.getAttribute('aria-expanded') === 'true';
+        const overflows = quote.scrollHeight > parseFloat(getComputedStyle(quote).lineHeight) * 5 + 2;
+        button.hidden = !overflows && !expanded;
+        card.classList.toggle('is-collapsed', overflows && !expanded);
+      }
+    }
+    for (const card of cards) {
+      const button = card.querySelector('.review-expand');
+      button.addEventListener('click', () => {
+        const expanded = button.getAttribute('aria-expanded') !== 'true';
+        button.setAttribute('aria-expanded', expanded);
+        button.textContent = expanded ? 'Свернуть' : 'Читать полностью';
+        updateReviewExpansion();
+      });
+    }
+    function updateReviews() {
+      const bounds = track.getBoundingClientRect();
+      const visible = cards.map((card, index) => ({ index, bounds: card.getBoundingClientRect() }))
+        .filter(card => card.bounds.left >= bounds.left - 2 && card.bounds.right <= bounds.right + 2);
+      if (visible.length) {
+        const first = visible[0].index + 1;
+        const last = visible[visible.length - 1].index + 1;
+        counter.textContent = (first === last ? first : first + '–' + last) + ' / ' + cards.length;
+      }
+      previous.disabled = track.scrollLeft <= 2;
+      next.disabled = track.scrollLeft >= track.scrollWidth - track.clientWidth - 2;
+    }
+    function moveReviews(direction) {
+      const step = cards[1].offsetLeft - cards[0].offsetLeft;
+      track.scrollBy({ left: direction * step, behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
+    }
+    previous.addEventListener('click', () => moveReviews(-1));
+    next.addEventListener('click', () => moveReviews(1));
+    track.addEventListener('keydown', event => {
+      if (!['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(event.key)) return;
+      event.preventDefault();
+      if (event.key === 'Home' || event.key === 'End') track.scrollTo({ left: event.key === 'Home' ? 0 : track.scrollWidth });
+      else moveReviews(event.key === 'ArrowLeft' ? -1 : 1);
+    });
+    track.addEventListener('scroll', updateReviews, { passive: true });
+    window.addEventListener('resize', () => { updateReviewExpansion(); updateReviews(); });
+    controls.hidden = false;
+    updateReviewExpansion();
+    updateReviews();
+  </script>
 </body>
 </html>
