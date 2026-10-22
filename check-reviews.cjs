@@ -24,7 +24,10 @@ const url = process.argv[2] || 'http://127.0.0.1:4173/';
     const track = page.locator('.review-track');
     const next = page.getByRole('button', { name: 'Следующие отзывы' });
     const previous = page.getByRole('button', { name: 'Предыдущие отзывы' });
-    assert.equal(await page.locator('.review-card').count(), 20);
+    assert.equal(await page.locator('.review-card').count(), 21);
+    assert.equal(await page.locator('.review-card').first().getAttribute('data-review'), '21');
+    assert.equal(await page.locator('[data-review="21"] blockquote').textContent(), 'бот реально помогает больше, чем сайт вуза, где нужно искать всю информацию по разделам. намного удобнее написать вопрос и моментально получить на него ответ. спасибо разработчику! 🙏🏻');
+    assert.equal(await page.locator('.reviews').evaluate(node => /От:|Чат:|\bid\s+\d{6,}/u.test(node.textContent)), false);
     assert.equal(await page.locator('[data-review="16"] blockquote').textContent(), '👎');
     assert.equal(await page.locator('[lang="en"]').count(), 1);
     if (process.argv[3]) {
@@ -32,7 +35,7 @@ const url = process.argv[2] || 'http://127.0.0.1:4173/';
       const expected = [...source.matchAll(/^(\d+)\. \*\*(.+?)\*\* — (.+)$/gm)].reverse();
       assert.equal(expected.length, 20);
       for (const [index, review] of expected.entries()) {
-        const card = page.locator('.review-card').nth(index);
+        const card = page.locator('.review-card').nth(index + 1);
         assert.equal(await card.getAttribute('data-review'), review[1]);
         assert.equal(await card.locator('blockquote').textContent(), review[3]);
       }
@@ -47,7 +50,7 @@ const url = process.argv[2] || 'http://127.0.0.1:4173/';
       await track.focus();
       await page.keyboard.press('End');
       await page.waitForFunction(() => document.querySelector('[data-direction="1"]').disabled);
-      assert.match(await page.locator('.review-counter').textContent(), /20 \/ 20$/);
+      assert.match(await page.locator('.review-counter').textContent(), /21 \/ 21$/);
       await page.keyboard.press('Home');
       await page.waitForFunction(() => document.querySelector('[data-direction="-1"]').disabled);
       await page.keyboard.press('ArrowRight');
@@ -79,11 +82,11 @@ const url = process.argv[2] || 'http://127.0.0.1:4173/';
     console.log('Native touch swipe and default animation PASS');
     const fallback = await browser.newPage({ javaScriptEnabled: false, viewport: { width: 390, height: 900 } });
     await fallback.goto(url);
-    assert.equal(await fallback.locator('.review-card').count(), 20);
+    assert.equal(await fallback.locator('.review-card').count(), 21);
     assert.equal(await fallback.locator('.review-controls').isVisible(), false);
     assert.equal(await fallback.locator('.is-collapsed').count(), 0);
     assert.deepEqual(errors, []);
-    console.log('20 original reviews and no-JavaScript fallback PASS');
+    console.log('21 original reviews and no-JavaScript fallback PASS');
   } finally {
     await browser.close();
   }
