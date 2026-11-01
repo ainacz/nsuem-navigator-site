@@ -44,7 +44,8 @@
     .features > h2, .repeat-cta h2 { margin: 0 0 24px; font: 500 24px/1.5 var(--display); letter-spacing: -.6px; }
     .feature-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
     .feature-card { min-width: 0; padding: 24px; border: 1px solid var(--line); border-radius: 16px; }
-    .feature-card h3 { margin: 0 0 12px; font: 500 15px/1.6 var(--display); }
+    .feature-card h3 { margin: 0 0 12px; }
+    .feature-card h3, .all-topics summary, .topic-groups h3, .room-pilot h3 { font: 500 15px/1.6 var(--display); }
     .feature-card > p:first-of-type { margin: 0 0 14px; color: var(--muted); font-size: 15px; line-height: 1.6; }
     .question-copy { display: flex; align-items: center; justify-content: space-between; gap: 16px; width: 100%; min-height: 44px; padding: 9px 0; border: 0; background: transparent; color: var(--blue); cursor: pointer; font: 15px/1.6 "Segoe UI", sans-serif; text-align: left; }
     .question-copy:hover .question-text { text-decoration: underline; text-underline-offset: 4px; }
@@ -53,14 +54,15 @@
     .copy-feedback { margin: 10px 0 0; color: var(--blue); font-size: 13px; line-height: 1.6; }
     .copy-feedback:empty { display: none; }
     .copy-manual { width: 100%; margin-top: 12px; padding: 12px; resize: vertical; border: 1px solid var(--line); border-radius: 8px; color: var(--ink); background: #f8faff; font: 15px/1.5 "Segoe UI", sans-serif; }
+    .feature-card > p, .question-copy, .copy-manual { font-family: Verdana, Geneva, Arial, sans-serif; }
     .all-topics { margin-top: 24px; border: 1px solid var(--line); border-radius: 14px; }
-    .all-topics summary { padding: 18px 22px; color: var(--blue); font-size: 15px; font-weight: 600; line-height: 1.6; cursor: pointer; }
+    .all-topics summary { padding: 18px 22px; color: var(--blue); cursor: pointer; }
     .all-topics summary:focus-visible, .copy-manual:focus-visible { outline: 3px solid var(--orange); outline-offset: 4px; }
     .topic-groups { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 22px 32px; padding: 8px 22px 24px; }
-    .topic-groups h3 { margin: 0 0 8px; font-size: 15px; line-height: 1.5; font-weight: 600; }
+    .topic-groups h3 { margin: 0 0 8px; }
     .topic-groups p { margin: 0; color: var(--muted); font-size: 14px; line-height: 1.7; }
     .room-pilot { margin-top: 24px; padding: 24px; border-left: 3px solid var(--purple); border-radius: 0 14px 14px 0; background: #f2f5fa; }
-    .room-pilot h3 { margin: 0 0 12px; font-size: 17px; line-height: 1.5; font-weight: 600; }
+    .room-pilot h3 { margin: 0 0 12px; }
     .room-pilot p { margin: 0; font-size: 15px; line-height: 1.7; }
     .room-pilot .room-note { margin-top: 12px; color: var(--muted); font-size: 13px; }
     .repeat-cta { margin-top: 48px; }
@@ -121,7 +123,7 @@
       .features > h2, .repeat-cta h2 { font-size: 19px; }
       .feature-grid, .topic-groups, .repeat-buttons { grid-template-columns: minmax(0, 1fr); }
       .feature-card { padding: 20px; }
-      .feature-card h3 { font-size: 14px; }
+      .feature-card h3, .all-topics summary, .topic-groups h3, .room-pilot h3 { font-size: 14px; }
       .room-pilot { padding: 20px; }
       .repeat-cta { margin-top: 32px; }
     }

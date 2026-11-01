@@ -43,6 +43,8 @@ const questions = [
       await page.setViewportSize({ width, height: 900 });
       assert.equal(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), true);
       assert.equal(await page.locator('.feature-grid').evaluate(node => getComputedStyle(node).gridTemplateColumns.split(' ').length), width <= 650 ? 1 : 2);
+      const headingFonts = await page.locator('.feature-card h3, .all-topics summary, .topic-groups h3, .room-pilot h3').evaluateAll(nodes => nodes.map(node => getComputedStyle(node).font));
+      assert.equal(new Set(headingFonts).size, 1, 'All capability headings must use the same typography');
       const order = await page.evaluate(() => ['.hero', '.reviews', '.features', '.repeat-cta'].map(selector => document.querySelector(selector).getBoundingClientRect()));
       for (let i = 1; i < order.length; i++) assert(order[i].top >= order[i - 1].bottom);
       const summary = page.locator('.all-topics summary');
