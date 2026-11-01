@@ -14,13 +14,13 @@ const url = process.argv[2] || 'http://127.0.0.1:4173/';
     await page.evaluate(() => document.fonts.ready);
     assert.equal(await page.evaluate(() => {
       const reviews = document.querySelector('.reviews').getBoundingClientRect();
-      const examples = document.querySelector('.examples').getBoundingClientRect();
+      const features = document.querySelector('.features').getBoundingClientRect();
       const max = document.querySelector('.max').getBoundingClientRect();
       const quote = document.querySelector('.review-card blockquote').getBoundingClientRect();
       const pattern = document.querySelector('.brand-pattern').getBoundingClientRect();
       const heading = document.querySelector('.messengers h2').getBoundingClientRect();
-      return max.bottom <= reviews.top && reviews.bottom <= examples.top && quote.top + 44 <= innerHeight && pattern.bottom <= heading.top + 1;
-    }), true, 'Reviews must follow bot buttons, precede examples and show text on the first phone screen');
+      return max.bottom <= reviews.top && reviews.bottom <= features.top && quote.top + 44 <= innerHeight && pattern.bottom <= heading.top + 1;
+    }), true, 'Reviews must follow bot buttons, precede features and show text on the first phone screen');
     const track = page.locator('.review-track');
     const next = page.getByRole('button', { name: 'Следующие отзывы' });
     const previous = page.getByRole('button', { name: 'Предыдущие отзывы' });
